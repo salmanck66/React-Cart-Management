@@ -1,13 +1,8 @@
 import React from 'react';
 import Nav from './Nav';
-import { useEffect } from 'react';
 
 const Cart = ({ products, cart, removeItem }) => {
   const cartProd = products.filter(prod => cart.includes(prod.id));
-
-  const handleRemoveItem = (id) => {
-    removeItem(id);
-  };
 
   return (
     <div>
@@ -20,8 +15,7 @@ const Cart = ({ products, cart, removeItem }) => {
               <h3>{product.title}</h3>
               <p>Price: ${product.price}</p>
             </div>
-            {/* Use an arrow function to pass arguments */}
-            <button onClick={() => handleRemoveItem(product.id)} className='btn btn-danger'>Remove</button>
+            <button onClick={() => removeItem(product.id)} className='btn btn-danger'>Remove</button>
           </li>
         ))}
       </ul>

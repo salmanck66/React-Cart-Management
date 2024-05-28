@@ -1,28 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Product from './Product';
-import toast, { Toaster } from "react-hot-toast";
+import toast, { Toaster } from 'react-hot-toast';
 import Nav from './Nav';
 
-const ProductList = ({ products, setProducts, cart, setCart }) => {
-  useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
-      .then(res => res.json())
-      .then(data => setProducts(data));
-  }, []);
-
-  const addToCart = (id) => {
-    if (cart.includes(id)) {
-      toast.error("Already in cart");
-      return;
-    }
-    setCart((prevCart) => [...prevCart, id]);
-  };
-
+const ProductList = ({ products, cart, addToCart }) => {
   return (
     <>
       <Nav />
       <div className='flex flex-col-2 flex-wrap'>
-        {products.map((item) =>
+        {products.map((item) => (
           <Product
             key={item.id}
             id={item.id}
@@ -34,13 +20,8 @@ const ProductList = ({ products, setProducts, cart, setCart }) => {
             image={item.image}
             addToCart={addToCart}
           />
-        )}
-        {/* Use Link to navigate to the cart */}
-
-        <Toaster
-          position="bottom-right"
-          reverseOrder={false}
-        />
+        ))}
+        <Toaster position="bottom-right" reverseOrder={false} />
       </div>
     </>
   );
